@@ -1,39 +1,42 @@
 let wins = 0;
 let losses = 0;
+let roundCount;
+
+
 
 let getComputerChoice = function() {
     let randomNumber = (Math.random() * 99);
 
-    return (randomNumber <= 33) ? ("rock") 
-    : (randomNumber >= 66) ? ("paper")
+    return (randomNumber <= 34) ? ("rock") 
+    : (randomNumber > 65) ? ("paper")
     : ("scissors") ;
 };
 
 
 
 function round() {
-    let playerChoice = (prompt("Choose rock, paper, or scissors.", ""));
-    let computerChoice = getComputerChoice();
-    let win = `You win. ${playerChoice} beats ${getComputerChoice()}.`;
-    let loss = `You lose. ${playerChoice} loses to ${getComputerChoice()}.`;
-    let tie = `It's a tie. ${playerChoice} ties with ${getComputerChoice()}.`;
+    const ComputerChoice = getComputerChoice();
+    const playerChoice = (prompt("Choose rock, paper, or scissors.", ""));
+    let win = `You win. ${playerChoice} beats ${ComputerChoice}.`;
+    let loss = `You lose. ${playerChoice} loses to ${ComputerChoice}.`;
+    let tie = `It's a tie. ${playerChoice} ties with ${ComputerChoice}.`;
 
-    if (playerChoice.toLowerCase() === "rock" && getComputerChoice() === "scissors"
-    || playerChoice.toLowerCase() === "scissors" && getComputerChoice() === "paper"
-    || playerChoice.toLowerCase() === "paper" && getComputerChoice() === "rock") {
+    if (playerChoice.toLowerCase() === "rock" && ComputerChoice === "scissors"
+    || playerChoice.toLowerCase() === "scissors" && ComputerChoice === "paper"
+    || playerChoice.toLowerCase() === "paper" && ComputerChoice === "rock") {
         console.log(win);
         wins++;
-    } else if (getComputerChoice() === "rock" && playerChoice.toLowerCase() === "scissors"
-    || getComputerChoice() === "scissors" && playerChoice.toLowerCase() === "paper"
-    || getComputerChoice() === "paper" && playerChoice.toLowerCase() === "rock") {
+    } else if (ComputerChoice === "rock" && playerChoice.toLowerCase() === "scissors"
+    || ComputerChoice === "scissors" && playerChoice.toLowerCase() === "paper"
+    || ComputerChoice === "paper" && playerChoice.toLowerCase() === "rock") {
         console.log(loss);
         losses++;
-    } else if (playerChoice.toLowerCase() === "rock" && getComputerChoice() === "rock"
-    || playerChoice.toLowerCase() === "scissors" && getComputerChoice() === "scissors"
-    || playerChoice.toLowerCase() === "paper" && getComputerChoice() === "paper") {
+    } else if (playerChoice.toLowerCase() === "rock" && ComputerChoice === "rock"
+    || playerChoice.toLowerCase() === "scissors" && ComputerChoice === "scissors"
+    || playerChoice.toLowerCase() === "paper" && ComputerChoice === "paper") {
         console.log(tie);
     } else {
-        prompt(`Invalid response. Try again.`)
+        roundCount--;
     }
 }
 
@@ -47,3 +50,5 @@ function game() {
             console.log(`You Lose the Game ${losses} to ${wins}. Refresh the page to play again`)
         }
     }
+
+    game();
